@@ -1,0 +1,26 @@
+server {
+        listen 80;
+        listen [::]:80;
+server name www.sehatq.com/abc/def sehatq.com/abc/def;
+return 301 https://sehatq.com$request_uri;
+
+}
+
+server {
+    listen                  443 ssl http2;
+    listen                  [::]:443 ssl http2;
+    server_name            www.sehatq.com/abc/def   
+
+    # SSL
+    ssl_certificate         ;
+    ssl_certificate_key     ;
+
+
+
+        access_log /var/log/nginx/reverse-access.log;
+        error_log /var/log/nginx/reverse-error.log;
+
+        location / {
+                    proxy_pass https://www.sehatq.com;
+  }
+}
